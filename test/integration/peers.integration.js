@@ -51,11 +51,13 @@ function generateNodePeers (numOfPeers, syncMode, syncModeArgs) {
 	syncModeArgs = syncModeArgs || SYNC_MODE_DEFAULT_ARGS;
 
 	var peersList = [];
+
 	switch (syncMode) {
 		case SYNC_MODE.RANDOM:
 			if (typeof syncModeArgs.RANDOM.PROBABILITY !== 'number') {
 				throw new Error('Probability parameter not specified to random sync mode');
 			}
+
 			var isPickedWithProbability = function (n) {
 				return !!n && Math.random() <= n;
 			};
@@ -90,6 +92,7 @@ function generateNodePeers (numOfPeers, syncMode, syncModeArgs) {
 				}
 			});
 	}
+
 	return peersList;
 }
 
@@ -101,6 +104,7 @@ function generateNodesConfig (numOfPeers, syncMode, forgingNodesIndices) {
 
 	return Array.apply(null, new Array(numOfPeers)).map(function (val, index) {
 		var isForging = forgingNodesIndices.indexOf(index) !== -1;
+
 		return {
 			ip: '127.0.0.1',
 			port: 5000 + index,
@@ -115,13 +119,11 @@ function generateNodesConfig (numOfPeers, syncMode, forgingNodesIndices) {
 }
 
 function generatePM2NodesConfig (testNodeConfigs) {
-
 	var pm2Config = {
 		apps: []
 	};
 
 	function insertNewNode (index, nodeConfig) {
-
 		function peersAsString (peersList) {
 			return peersList.reduce(function (acc, peer) {
 				acc += peer.ip + ':' + peer.port + ',';
