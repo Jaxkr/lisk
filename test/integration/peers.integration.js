@@ -25,7 +25,7 @@ var SYNC_MODE = {
 
 var SYNC_MODE_DEFAULT_ARGS = {
 	RANDOM: {
-		PROBABILITY: 0.5 //range 0 - 1
+		PROBABILITY: 0.5 // Range 0 - 1
 	},
 	ALL_TO_GROUP: {
 		INDICES: []
